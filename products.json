@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Sepatu Sneakers Pria",
+    "price": 350000,
+    "description": "Sepatu sneakers pria berkualitas tinggi dengan bahan canvas premium. Nyaman dipakai sehari-hari, cocok untuk casual maupun olahraga ringan. Tersedia dalam berbagai ukuran.",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
+    "category": "Sepatu",
+    "rating": 4.5,
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "name": "Kaos Polos Oversize",
+    "price": 120000,
+    "description": "Kaos polos oversize bahan cotton combed 30s. Adem, nyaman, dan stylish. Cocok untuk berbagai kesempatan. Tersedia dalam banyak pilihan warna.",
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+    "category": "Pakaian",
+    "rating": 4.2,
+    "stock": 100
+  },
+  {
+    "id": 3,
+    "name": "Tas Ransel Laptop",
+    "price": 280000,
+    "description": "Tas ransel multifungsi dengan kompartemen laptop 15 inch. Bahan waterproof, banyak kantong, dan desain ergonomis. Ideal untuk pelajar dan pekerja.",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
+    "category": "Tas",
+    "rating": 4.7,
+    "stock": 30
+  },
+  {
+    "id": 4,
+    "name": "Jam Tangan Digital",
+    "price": 450000,
+    "description": "Jam tangan digital sporty dengan fitur stopwatch, alarm, dan tahan air hingga 50 meter. Desain modern cocok untuk aktivitas outdoor.",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+    "category": "Aksesoris",
+    "rating": 4.3,
+    "stock": 25
+  },
+  {
+    "id": 5,
+    "name": "Headphone Wireless",
+    "price": 650000,
+    "description": "Headphone wireless Bluetooth 5.0 dengan noise cancelling. Baterai tahan hingga 30 jam, suara jernih dan bass yang kuat. Cocok untuk musik dan gaming.",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    "category": "Elektronik",
+    "rating": 4.6,
+    "stock": 20
+  },
+  {
+    "id": 6,
+    "name": "Celana Jogger Pria",
+    "price": 175000,
+    "description": "Celana jogger pria bahan fleece tebal dan lembut. Cocok untuk santai di rumah maupun olahraga. Dilengkapi kantong samping dan belakang.",
+    "image": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&h=400&fit=crop",
+    "category": "Pakaian",
+    "rating": 4.1,
+    "stock": 60
+  },
+  {
+    "id": 7,
+    "name": "Kacamata Sunglasses",
+    "price": 220000,
+    "description": "Kacamata hitam UV400 protection dengan frame metal premium. Desain klasik yang timeless, cocok untuk pria dan wanita. Dilengkapi case pelindung.",
+    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop",
+    "category": "Aksesoris",
+    "rating": 4.4,
+    "stock": 40
+  },
+  {
+    "id": 8,
+    "name": "Sepatu Sandal Casual",
+    "price": 195000,
+    "description": "Sandal casual pria wanita dengan sol karet anti-slip. Ringan, nyaman, dan tahan lama. Cocok untuk penggunaan sehari-hari di dalam maupun luar ruangan.",
+    "image": "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=400&h=400&fit=crop",
+    "category": "Sepatu",
+    "rating": 4.0,
+    "stock": 75
+  },
+  {
+    "id": 9,
+    "name": "Kemeja Flannel",
+    "price": 210000,
+    "description": "Kemeja flannel motif kotak-kotak bahan cotton tebal. Hangat dan stylish, cocok untuk cuaca dingin. Tersedia dalam berbagai kombinasi warna menarik.",
+    "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&h=400&fit=crop",
+    "category": "Pakaian",
+    "rating": 4.3,
+    "stock": 45
+  },
+  {
+    "id": 10,
+    "name": "Power Bank 20000mAh",
+    "price": 320000,
+    "description": "Power bank kapasitas 20000mAh dengan 2 port USB dan 1 port Type-C. Fast charging 18W, dilengkapi LED indicator. Kompatibel dengan semua perangkat.",
+    "image": "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=400&fit=crop",
+    "category": "Elektronik",
+    "rating": 4.5,
+    "stock": 35
+  },
+  {
+    "id": 11,
+    "name": "Topi Baseball Cap",
+    "price": 95000,
+    "description": "Topi baseball cap bahan twill berkualitas dengan bordir logo minimalis. Adjustable strap di belakang, cocok untuk semua ukuran kepala.",
+    "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop",
+    "category": "Aksesoris",
+    "rating": 4.2,
+    "stock": 80
+  },
+  {
+    "id": 12,
+    "name": "Tas Selempang Mini",
+    "price": 165000,
+    "description": "Tas selempang mini bahan kulit sintetis premium. Muat HP, dompet, dan barang kecil lainnya. Tali adjustable, cocok untuk pria dan wanita.",
+    "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop",
+    "category": "Tas",
+    "rating": 4.4,
+    "stock": 55
+  }
+]

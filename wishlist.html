@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishlist - ShopKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <link rel="stylesheet" href="../assets/style.css"/>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 transition-colors duration-300 min-h-screen">
+  <div id="navbar"></div>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+      </svg>
+      Wishlist Saya
+    </h1>
+
+    <div id="wishlist-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"></div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/products.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script>
+    Theme.init();
+    if (!Auth.requireAuth()) {}
+    renderNavbar('wishlist');
+
+    async function renderWishlist() {
+      await Products.load();
+      const wishlist = Storage.getWishlist();
+      const grid = document.getElementById('wishlist-grid');
+
+      if (wishlist.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-20">
+            <div class="text-7xl mb-4">💔</div>
+            <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Wishlist Kosong</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Belum ada produk yang disimpan</p>
+            <a href="../index.html" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors inline-block">
+              Jelajahi Produk
+            </a>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = wishlist.map(p => Products.renderCard(p, '../')).join('');
+
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('.add-to-cart-btn') || e.target.closest('.wishlist-btn')) return;
+          window.location.href = 'product.html?id=' + this.dataset.id;
+        });
+      });
+
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const product = Products.getById(this.dataset.id);
+          if (product) Cart.addItem(product);
+        });
+      });
+
+      document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const id = parseInt(this.dataset.id);
+          const wishlist = Storage.getWishlist();
+          const idx = wishlist.findIndex(w => w.id === id);
+          if (idx >= 0) {
+            wishlist.splice(idx, 1);
+            Storage.saveWishlist(wishlist);
+            Toast.show('Dihapus dari wishlist', 'info');
+            renderWishlist();
+          }
+        });
+      });
+    }
+
+    renderWishlist();
+  </script>
+</body>
+</html>

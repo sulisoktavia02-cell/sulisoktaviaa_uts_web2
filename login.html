@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - ShopKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <link rel="stylesheet" href="../assets/style.css"/>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 min-h-screen flex items-center justify-center transition-colors duration-300">
+  <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-xs w-full"></div>
+
+  <div class="w-full max-w-md px-4">
+    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
+      <div class="text-center mb-8">
+        <a href="../index.html" class="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-2xl mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          ShopKu
+        </a>
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Selamat Datang</h1>
+        <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Masuk ke akun Anda</p>
+      </div>
+
+      <form id="login-form" novalidate>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+          <input type="email" id="email" placeholder="email@contoh.com"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm"/>
+          <p id="email-error" class="text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="password" placeholder="Masukkan password"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm pr-12"/>
+            <button type="button" id="toggle-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </button>
+          </div>
+          <p id="password-error" class="text-red-500 text-xs mt-1 hidden"></p>
+        </div>
+
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+          Masuk
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
+        Belum punya akun?
+        <a href="register.html" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Daftar sekarang</a>
+      </p>
+
+      <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+        <p class="text-xs text-blue-600 dark:text-blue-400 text-center">Demo: daftar akun baru untuk mulai berbelanja</p>
+      </div>
+    </div>
+  </div>
+
+  <button id="theme-toggle" class="fixed top-4 right-4 p-2 bg-white dark:bg-gray-800 rounded-full shadow-md text-gray-600 dark:text-gray-300 hover:scale-110 transition-transform">
+  </button>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/theme.js"></script>
+  <script>
+    Theme.init();
+
+    if (Auth.isLoggedIn()) {
+      window.location.href = '../index.html';
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', () => Theme.toggle());
+
+    document.getElementById('toggle-password').addEventListener('click', function () {
+      const input = document.getElementById('password');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      let valid = true;
+      document.getElementById('email-error').classList.add('hidden');
+      document.getElementById('password-error').classList.add('hidden');
+
+      if (!email) {
+        document.getElementById('email-error').textContent = 'Email wajib diisi.';
+        document.getElementById('email-error').classList.remove('hidden');
+        valid = false;
+      }
+      if (!password) {
+        document.getElementById('password-error').textContent = 'Password wajib diisi.';
+        document.getElementById('password-error').classList.remove('hidden');
+        valid = false;
+      }
+      if (!valid) return;
+
+      const result = Auth.login(email, password);
+      if (result.success) {
+        Toast.show('Login berhasil! Selamat datang, ' + result.user.name, 'success');
+        setTimeout(() => { window.location.href = '../index.html'; }, 1000);
+      } else {
+        Toast.show(result.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>

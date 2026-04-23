@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - ShopKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <link rel="stylesheet" href="../assets/style.css"/>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 transition-colors duration-300 min-h-screen">
+  <div id="navbar"></div>
+
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Checkout
+    </h1>
+
+    <!-- Steps -->
+    <div class="flex items-center gap-2 mb-8">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+        <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">Informasi</span>
+      </div>
+      <div class="flex-1 h-0.5 bg-gray-200 dark:bg-gray-700"></div>
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 text-gray-500 rounded-full flex items-center justify-center text-sm font-bold" id="step2-icon">2</div>
+        <span class="text-sm font-medium text-gray-500 dark:text-gray-400" id="step2-label">Konfirmasi</span>
+      </div>
+    </div>
+
+    <div id="checkout-content" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Form -->
+      <div class="lg:col-span-2">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+          <h2 class="font-bold text-gray-800 dark:text-white text-lg mb-5">Informasi Pengiriman</h2>
+          <form id="checkout-form" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Penerima</label>
+                <input type="text" id="recipient-name" placeholder="Nama lengkap"
+                  class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"/>
+                <p id="name-error" class="text-red-500 text-xs mt-1 hidden"></p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">No. HP</label>
+                <input type="tel" id="phone" placeholder="08xxxxxxxxxx"
+                  class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"/>
+                <p id="phone-error" class="text-red-500 text-xs mt-1 hidden"></p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Alamat Lengkap</label>
+              <textarea id="address" rows="3" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Kota"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm resize-none"></textarea>
+              <p id="address-error" class="text-red-500 text-xs mt-1 hidden"></p>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Metode Pembayaran</label>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <label class="payment-option cursor-pointer">
+                  <input type="radio" name="payment" value="Transfer Bank" class="sr-only" checked/>
+                  <div class="border-2 border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-3 text-center text-sm font-medium text-indigo-600 dark:text-indigo-400 payment-label">
+                    🏦 Transfer Bank
+                  </div>
+                </label>
+                <label class="payment-option cursor-pointer">
+                  <input type="radio" name="payment" value="QRIS" class="sr-only"/>
+                  <div class="border-2 border-gray-200 dark:border-gray-700 rounded-xl p-3 text-center text-sm font-medium text-gray-600 dark:text-gray-400 payment-label hover:border-indigo-300">
+                    📱 QRIS
+                  </div>
+                </label>
+                <label class="payment-option cursor-pointer">
+                  <input type="radio" name="payment" value="COD" class="sr-only"/>
+                  <div class="border-2 border-gray-200 dark:border-gray-700 rounded-xl p-3 text-center text-sm font-medium text-gray-600 dark:text-gray-400 payment-label hover:border-indigo-300">
+                    💵 COD
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Catatan (opsional)</label>
+              <input type="text" id="notes" placeholder="Catatan untuk penjual..."
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"/>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="lg:col-span-1">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6 sticky top-20">
+          <h2 class="font-bold text-gray-800 dark:text-white text-lg mb-4">Ringkasan Pesanan</h2>
+          <div id="order-items" class="space-y-3 mb-4 max-h-60 overflow-y-auto"></div>
+          <div class="border-t border-gray-100 dark:border-gray-700 pt-4 space-y-2 text-sm">
+            <div class="flex justify-between text-gray-600 dark:text-gray-400">
+              <span>Subtotal</span>
+              <span id="subtotal-display"></span>
+            </div>
+            <div class="flex justify-between text-gray-600 dark:text-gray-400">
+              <span>Ongkos Kirim</span>
+              <span id="shipping-display"></span>
+            </div>
+            <div class="flex justify-between font-bold text-gray-800 dark:text-white pt-2 border-t border-gray-100 dark:border-gray-700">
+              <span>Total</span>
+              <span id="total-display" class="text-indigo-600 dark:text-indigo-400"></span>
+            </div>
+          </div>
+          <button id="place-order" class="mt-5 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition-colors">
+            Buat Pesanan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+      <div class="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Pesanan Berhasil!</h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Terima kasih telah berbelanja di ShopKu</p>
+      <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-3 mb-6">
+        <p class="text-xs text-gray-500 dark:text-gray-400">ID Transaksi</p>
+        <p id="transaction-id" class="font-bold text-indigo-600 dark:text-indigo-400 text-sm mt-1"></p>
+      </div>
+      <div class="flex gap-3">
+        <a href="orders.html" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+          Lihat Pesanan
+        </a>
+        <a href="../index.html" class="flex-1 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm">
+          Belanja Lagi
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/toast.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/products.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script>
+    Theme.init();
+    if (!Auth.requireAuth()) {}
+    renderNavbar('checkout');
+
+    const items = Cart.getItems();
+    if (items.length === 0) {
+      window.location.href = 'cart.html';
+    }
+
+    const user = Auth.getCurrentUser();
+    if (user) {
+      document.getElementById('recipient-name').value = user.name;
+    }
+
+    // Payment option styling
+    document.querySelectorAll('.payment-option input').forEach(radio => {
+      radio.addEventListener('change', function () {
+        document.querySelectorAll('.payment-label').forEach(label => {
+          label.classList.remove('border-indigo-500', 'bg-indigo-50', 'dark:bg-indigo-900/20', 'text-indigo-600', 'dark:text-indigo-400');
+          label.classList.add('border-gray-200', 'dark:border-gray-700', 'text-gray-600', 'dark:text-gray-400');
+        });
+        const label = this.nextElementSibling;
+        label.classList.add('border-indigo-500', 'bg-indigo-50', 'dark:bg-indigo-900/20', 'text-indigo-600', 'dark:text-indigo-400');
+        label.classList.remove('border-gray-200', 'dark:border-gray-700', 'text-gray-600', 'dark:text-gray-400');
+      });
+    });
+
+    function renderSummary() {
+      const orderItems = document.getElementById('order-items');
+      orderItems.innerHTML = items.map(item => `
+        <div class="flex gap-3 items-center">
+          <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0" onerror="this.src='https://via.placeholder.com/48x48?text=?'"/>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-800 dark:text-white truncate">${item.name}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">x${item.quantity}</p>
+          </div>
+          <p class="text-sm font-semibold text-gray-800 dark:text-white flex-shrink-0">${Products.formatPrice(item.price * item.quantity)}</p>
+        </div>
+      `).join('');
+
+      const subtotal = Cart.getTotal();
+      const shipping = subtotal >= 200000 ? 0 : 15000;
+      const total = subtotal + shipping;
+
+      document.getElementById('subtotal-display').textContent = Products.formatPrice(subtotal);
+      document.getElementById('shipping-display').innerHTML = shipping === 0
+        ? '<span class="text-green-600 font-medium">GRATIS</span>'
+        : Products.formatPrice(shipping);
+      document.getElementById('total-display').textContent = Products.formatPrice(total);
+    }
+
+    function generateTransactionId() {
+      const ts = Date.now().toString(36).toUpperCase();
+      const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return 'TRX-' + ts + '-' + rand;
+    }
+
+    document.getElementById('place-order').addEventListener('click', function () {
+      const name = document.getElementById('recipient-name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const payment = document.querySelector('input[name="payment"]:checked')?.value || 'Transfer Bank';
+      const notes = document.getElementById('notes').value.trim();
+
+      // Reset errors
+      ['name-error','phone-error','address-error'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+
+      let valid = true;
+      if (!name) {
+        document.getElementById('name-error').textContent = 'Nama penerima wajib diisi.';
+        document.getElementById('name-error').classList.remove('hidden');
+        valid = false;
+      }
+      if (!phone || !/^[0-9]{10,13}$/.test(phone.replace(/\s/g, ''))) {
+        document.getElementById('phone-error').textContent = 'Nomor HP tidak valid (10-13 digit).';
+        document.getElementById('phone-error').classList.remove('hidden');
+        valid = false;
+      }
+      if (!address || address.length < 10) {
+        document.getElementById('address-error').textContent = 'Alamat wajib diisi (minimal 10 karakter).';
+        document.getElementById('address-error').classList.remove('hidden');
+        valid = false;
+      }
+      if (!valid) return;
+
+      const subtotal = Cart.getTotal();
+      const shipping = subtotal >= 200000 ? 0 : 15000;
+      const transactionId = generateTransactionId();
+
+      const order = {
+        id: transactionId,
+        userId: Auth.getCurrentUser().id,
+        items: Cart.getItems(),
+        recipient: { name, phone, address },
+        payment,
+        notes,
+        subtotal,
+        shipping,
+        total: subtotal + shipping,
+        status: 'Diproses',
+        createdAt: new Date().toISOString()
+      };
+
+      const orders = Storage.getOrders();
+      orders.unshift(order);
+      Storage.saveOrders(orders);
+      Cart.clear();
+
+      document.getElementById('transaction-id').textContent = transactionId;
+      document.getElementById('success-modal').classList.remove('hidden');
+    });
+
+    renderSummary();
+  </script>
+</body>
+</html>
